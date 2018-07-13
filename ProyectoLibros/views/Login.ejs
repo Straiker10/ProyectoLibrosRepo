@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Telas regionales del sur, empresa mexicana donde encontrarás el lugar de las mejores telas de Yucatán. Proyecto prueba para la universidad tecnológica metropolitana.">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/Images")/icono.ico">
+    <title>Telas regionales del sur</title>
+
+    <link href="../stylesheets/Content/font-face.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="../stylesheets/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <!-- Vendor CSS-->
+    <link href="../stylesheets/Content/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../stylesheets/Content/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="../stylesheets/Content/theme.css" rel="stylesheet" media="all">
+</head>
+<body>
+
+        <div class="page-wrapper">
+                <div class="page-content--bge5">
+                    <div class="container">
+                        <div class="login-wrap">
+                            <div class="login-content">
+                                <div class="login-logo">
+                                    <a href="@Url.Action("InicioFront", "Front")">
+                                        <img src="../images/logo2.png" alt="CoolAdmin" width="150px">
+                                    </a>
+                                </div>
+                                <!--@if ((string)TempData["ErrorMessage"] == "Usuario o contraseña incorrectos.")
+                                {
+                                    <div class="field-validation-error">
+                                        @TempData["ErrorMessage"].ToString()
+                                    </div>
+                                }
+                                else
+                                {
+            
+            
+                                }-->
+                                <div class="login-form">
+                                    
+                                       <!-- @Html.ValidationSummary(true, "Login failed. Check your login details.");-->
+                                        <div>
+                                            <fieldset>
+                                                <legend style="text-align:center">Inicio De Sesión</legend>
+                                                <div class="editor-label">
+                                                    <label>Ingrese Su Correo:</label>
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input type="text" class="form-control" required="required" name="Correo">
+                                                </div>
+                                                <br>
+                                                <div class="editor-label">
+                                                    <label>Ingrese Su Contraseña:</label>
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input type="password" class="form-control" required="required"  name="Contraseña">
+                                                   
+                                                </div>
+                                                <br />
+                                                <input type="submit" value="Iniciar sesión" class="au-btn au-btn--block au-btn--green m-b-20" />
+                                            </fieldset>
+                                        </div>
+                                </div>
+                            </div>
+                            <div><a href="/">Volver Al inicio</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- Jquery JS-->
+    <script src="../stylesheets/Content/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="../stylesheets/Content/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../stylesheets/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="../stylesheets/Content/vendor/slick/slick.min.js">
+    </script>
+    <script src="../stylesheets/Content/vendor/wow/wow.min.js"></script>
+    <script src="../stylesheets/Content/vendor/animsition/animsition.min.js"></script>
+    <script src="../stylesheets/Content/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="../stylesheets/Content/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../stylesheets/Content/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="../stylesheets/Content/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../stylesheets/Content/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../stylesheets/Content/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="../stylesheets/Content/vendor/select2/select2.min.js">
+    </script>
+    <!-- Main JS-->
+    <script src="../javascripts/main.js"></script>
+</body>
+</html>
