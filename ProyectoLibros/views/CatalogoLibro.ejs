@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3><%= titulo %></h3>
+    <% for(var i=0; i < libros.length; i++){ %>
+
+        <div class="col-md-4">
+          <img src="images/<%= libros[i].imagen %>" width="100%;" height="50%;" alt="">
+          <h3><%= libros[i].nombre %></h3>
+          <p><%= libros[i].descripcion %></p>
+          <%= libros[i].precio %><br>
+    
+        </div>
+    
+        <% }%>
+</body>
+</html>

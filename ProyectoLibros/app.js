@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser'); //modulo para recuperar 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+const fileUpload = require('express-fileupload'); //modulo para archivos
 
 var app = express();
 
@@ -19,8 +22,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Pasar datos del fomr en post. 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//para archivos 
+app.use(fileUpload());
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

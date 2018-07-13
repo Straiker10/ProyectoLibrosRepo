@@ -1,0 +1,62 @@
+<%- include ../header/headerBack.ejs%>
+
+<div class="page-wrapper">
+    <div class="page-container">
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" >
+                                <i class="zmdi zmdi-plus"></i><a href="/libros/crearLibro">Libros</a></button>
+                            <!-- DATA TABLE -->
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Descripcion</th>
+                                            <th>Autor</th>
+                                            <th>Precio</th>
+                                            <th>Acciones</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <% for(var i=0; i < libros.length; i++){ %>
+                                            
+                                            <tr class="spacer tr-shadow" id='row<%= libros[i].id_libro %>'>
+                                                <td><%= libros[i].nombre %></td>
+                                                <td><%= libros[i].descripcion %></td>
+                                                <td><%= libros[i].autor %></td>
+                                                <td><%= libros[i].precio %></td>
+                
+                                                <!--seccion botones-->
+                                                <td>
+                                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small" >
+                                                        <a href='/libros/modificarLibro/<%= libros[i].id_libro %>'>Editar Libro</a>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button onclick="eliminarLibro('<%= libros[i].id_libro %>');"  class="btn  btn-xs btn-danger">Eliminar libro</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"  id='row2<%= libros[i].id_libro %>'></tr>
+                                        <% }%>
+                                    </tbody>
+                                </table>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS para eliminar libro-->
+<script src="../javascripts/libros.js"></script>
+<%- include ../footer/footerBack.ejs%>
