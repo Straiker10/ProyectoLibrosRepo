@@ -11,6 +11,15 @@ exports.libro= function(req,res){
     });
 };
 
+exports.showLibro= function(req,res){
+    //res.render('CatalogoLibro' ,{titulo:'Catalgo de libros'});
+    db.query("SELECT * FROM libro", function(err,results){
+
+        res.render('CatalogoLibro', { titulo: 'Libros', libros: results });
+    });
+};
+
+
 exports.nuevoLibro= function(req,res){
     //res.render('CatalogoLibro' ,{titulo:'Catalgo de libros'});
 

@@ -19,6 +19,11 @@ router.get('/Contacto', function(req, res, next) {
   res.render('Contacto', { title: 'Contacto' });
 });
 
+//Catalogo provisional
+
+//Aplicacion de Controllers //indexLibro
+router.get('/CatalogoLibro', libroController.showLibro);
+
 //Aplicacion de Controllers //indexLibro
 router.get('/libros/indexLibro', libroController.libro);
 
