@@ -4,13 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser'); //modulo para recuperar 
-
+var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const fileUpload = require('express-fileupload'); //modulo para archivos
 
 var app = express();
+
+app.use(session({
+	secret: 'SOMERANDOMSECRETHERE',
+	resave: true,
+	saveUninitialized: true,
+	cookie: { maxAge:60000 }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

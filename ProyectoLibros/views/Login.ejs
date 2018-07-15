@@ -54,27 +54,35 @@
                                 <div class="login-form">
                                     
                                        <!-- @Html.ValidationSummary(true, "Login failed. Check your login details.");-->
-                                        <div>
+                                       <form action="Login" method="post">
+                                           <div>
                                             <fieldset>
                                                 <legend style="text-align:center">Inicio De Sesión</legend>
+                                                <%if (error!="") {%>
+                                                <div class="error">
+                                                    <p><%= error%></p>
+                                                </div>
+                                                <%}%>
                                                 <div class="editor-label">
                                                     <label>Ingrese Su Correo:</label>
                                                 </div>
                                                 <div class="editor-field">
-                                                    <input type="text" class="form-control" required="required" name="Correo">
+                                                    <input type="text" class="form-control" required="required" name="correo" id="correo">
                                                 </div>
                                                 <br>
                                                 <div class="editor-label">
                                                     <label>Ingrese Su Contraseña:</label>
                                                 </div>
                                                 <div class="editor-field">
-                                                    <input type="password" class="form-control" required="required"  name="Contraseña">
+                                                    <input type="password" class="form-control" required="required" id="contrasena" name="contrasena">
                                                    
                                                 </div>
                                                 <br />
                                                 <input type="submit" value="Iniciar sesión" class="au-btn au-btn--block au-btn--green m-b-20" />
                                             </fieldset>
                                         </div>
+                                       </form>
+                                        
                                 </div>
                             </div>
                             <div><a href="/">Volver Al inicio</a></div>
