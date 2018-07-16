@@ -1,35 +1,33 @@
 <%- include header/headerFront.ejs%>
 <section id="portfolio">
         <div class="container">
-            <div class="center">
-                <h2><%= titulo %></h2>
-            </div>
-
-            <div class="row">
-           
-                <div class="portfolio-items">
+        <div class="team">
+                    <div class="row clearfix">
                     <% for(var i=0; i < libros.length; i++){ %>
-                    
-                    <div class="portfolio-item apps col-xs-12 col-sm-4 col-md-3">
-                        <div class="recent-work-wrap">
-                            <img class="responsive"  src="images/<%= libros[i].imagen %>"  alt="">
-                            <div class="overlay">
-                                <div class="recent-work-inner">
-                                    <h3><%= libros[i].nombre %></h3>
-                                    <p><%= libros[i].descripcion %></p>
-                                    <a class="preview" href="#" rel="prettyPhoto"><i class="fa fa-eye"></i> Ver imagen</a>
-                                </div>
-                            </div>
+                        <div class="col-md-4 col-sm-6">	
+                                <div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="height: 100px; height: 300px;">
+                                    <div class="media">
+                                        <div class="pull-left" item-width="100px">
+                                            <img class="media-object" src="images/<%= libros[i].imagen %>" alt="Libros" style="width: 200px;">
+                                        </div>
+                                        <div class="media-body"></div>
+                                            <h4 style="text-align: center"><%= libros[i].nombre %></h4>
+                                            <ul class="social_icons">
+                                                    <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li> 
+                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                </ul>
+                                        </div>
+                                        <br>
+                                        <p style="text-align: center"><%= libros[i].descripcion %></p>
+                                </div><!--/.media -->
                         </div>
-                        <h2 style="text-align:center">Precio: <%= libros[i].precio %></h2>
-                    </div><!--/.portfolio-item-->
                     <% }%>
+                </div><!--/.col-lg-4 -->
                 </div>
-                
-            </div>
-
-
         </div>
-    </section><!--/#portfolio-item-->
+        </div>
+        
+</section><!--/#portfolio-item-->
 
 <%- include footer/footerFront.ejs%>
