@@ -1,33 +1,47 @@
 <%- include header/headerFront.ejs%>
 <section id="portfolio">
-        <div class="container">
-        <div class="team">
-                    <div class="row clearfix">
-                    <% for(var i=0; i < libros.length; i++){ %>
-                        <div class="col-md-4 col-sm-6">	
-                                <div class="single-profile-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" style="height: 100px; height: 300px;">
-                                    <div class="media">
-                                        <div class="pull-left" item-width="100px">
-                                            <img class="media-object" src="images/<%= libros[i].imagen %>" alt="Libros" style="width: 200px;">
-                                        </div>
-                                        <div class="media-body"></div>
-                                            <h4 style="text-align: center"><%= libros[i].nombre %></h4>
-                                            <ul class="social_icons">
-                                                    <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li> 
-                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                </ul>
-                                        </div>
-                                        <br>
-                                        <p style="text-align: center"><%= libros[i].descripcion %></p>
-                                </div><!--/.media -->
-                        </div>
-                    <% }%>
-                </div><!--/.col-lg-4 -->
-                </div>
-        </div>
-        </div>
         
+    <div class="container">
+                    <div class="row" style="border:5cm">
+                            
+                <!-- our-team -->
+    <% for(var i=0; i < libros.length; i++){ %>
+        <div style="border: mediumspringgreen">
+        <div class="col-md-4 col-md-6" >
+                    <h2 style="text-align: center;  font-size: 20pt; color: #149196; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                        Libro: <%= libros[i].nombre %>
+                    </h2>
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-10">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img alt="Bootstrap Image Preview" src="../images/<%= libros[i].imagen %>" />
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div> 
+                    <address style="text-align: center">
+                         <strong >Autor: <%= libros[i].autor %></strong><br /> Tecnología: <%= libros[i].tecnologia %><br /><br>
+                         <img src="../images/circulo.png">&nbsp;&nbsp;<%= libros[i].status %>
+                    </address>
+                    <div style="text-align: center; font-size: 30pt; color: #149196; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" >$<%= libros[i].precio %></div>
+                    <br>
+                    <div>
+                        <p><%= libros[i].descripcion %></p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success btn-block btn-md" style="background-color:#C52D2F; border-color: #C52D2F" >
+                        Agregar Carrito
+                    </button> 
+                    <button type="submit" class="btn btn-success btn-block" style="background-color:#C52D2F; border-color: #C52D2F">
+                        Comentarios
+                    </button>
+            </div>
+            </div>
+    <% }%>
+</div>   
+</div>    
 </section><!--/#portfolio-item-->
 
 <%- include footer/footerFront.ejs%>

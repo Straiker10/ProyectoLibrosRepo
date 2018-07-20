@@ -55,6 +55,9 @@ router.post('/Login', function(req, res) {
 router.get('/Contacto', function(req, res, next) {
   res.render('Contacto', { title: 'Contacto' });
 });
+router.get('/CarritoCompras', function(req, res, next) {
+	res.render('CarritoCompras', { title: 'Carrito' });
+  });
 
 
 

@@ -1,0 +1,20 @@
+<%- include header/headerFront.ejs%>
+<form action="https://sandbox.paypal.com/cgi-bin/webscr" method="post" target="paypal">
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="image_url" value="http://risal.collectifs.net/IMG/cache-150x50/arton1758-150x50.jpg"> 
+        <input type="hidden" name="image_url" value="http://risal.collectifs.net/IMG/cache-150x50/arton1758-150x50.jpg"> 
+     
+    <input type="hidden" name="add" value="1">
+    <input type="hidden" name="business" value="uhperezoscar@gmail.com">
+    <input type="hidden" name="item_name" value="Silla Empresarial">
+    <input type="hidden" name="amount" value="1500.00">
+
+    <input type="hidden" name="shopping_url" value="http://www.misitio.com/index.html">
+    <input type="hidden" name="return" value="http://www.misitio.com/gracias.html">
+    <input type="hidden" name="cancel_return" value="http://www.misitio.com/cancelar.html">
+    <input type="hidden" name="bn" value="PP-ShopCartBF:x-click-but22.gif:NonHosted">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but22.gif" border="0"
+        name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+<%- include footer/footerFront.ejs%>

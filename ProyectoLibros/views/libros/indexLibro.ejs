@@ -9,7 +9,7 @@
                         <div class="col-md-12">
 
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small" >
-                                <i class="zmdi zmdi-plus"></i><a href="/libros/crearLibro">Libros</a></button>
+                                <i></i><a href="/libros/crearLibro">Nuevo Libro</a></button>
                             <!-- DATA TABLE -->
                             <div class="table-responsive table-responsive-data2">
                                 <table class="table table-data2">
@@ -19,7 +19,7 @@
                                             <th>Descripcion</th>
                                             <th>Autor</th>
                                             <th>Precio</th>
-                                            <th>Acciones</th>
+                                            <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -32,15 +32,16 @@
                                                 <td><%= libros[i].descripcion %></td>
                                                 <td><%= libros[i].autor %></td>
                                                 <td><%= libros[i].precio %></td>
+                                                <td></td>
                 
                                                 <!--seccion botones-->
                                                 <td>
-                                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small" >
-                                                        <a href='/libros/modificarLibro/<%= libros[i].id_libro %>'>Editar Libro</a>
+                                                    <button class="au-btn au-btn-icon au-btn--green" >
+                                                        <a href='/libros/modificarLibro/<%= libros[i].id_libro %>'>Editar</a>
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <button onclick="eliminarLibro('<%= libros[i].id_libro %>');"  class="btn  btn-xs btn-danger">Eliminar libro</button>
+                                                    <button onclick="eliminarLibro('<%= libros[i].id_libro %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
                                                 </td>
                                             </tr>
                                             <tr class="spacer"  id='row2<%= libros[i].id_libro %>'></tr>

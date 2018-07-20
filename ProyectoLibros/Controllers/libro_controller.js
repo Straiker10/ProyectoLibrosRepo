@@ -13,7 +13,7 @@ exports.libro= function(req,res){
 
 exports.showLibro= function(req,res){
     //res.render('CatalogoLibro' ,{titulo:'Catalgo de libros'});
-    db.query("SELECT * FROM libro", function(err,results){
+    db.query("SELECT * FROM libro Where status ='Disponible'", function(err,results){
 
         res.render('CatalogoLibro', { titulo: 'Libros', libros: results });
     });
@@ -34,7 +34,8 @@ exports.crearLibro = function(req, res, nex){
         autor: req.body.autor,
         precio: req.body.precio,
         imagen: req.files.imagen.name,
-        tecnologia: req.body.tecnologia
+        tecnologia: req.body.tecnologia,
+        status: req.body.status
     }
 
     db.query("INSERT INTO libro SET ?",libro, function(err, results){
@@ -86,7 +87,8 @@ exports.postModificarLibro = function(req, res){
             autor: req.body.autor,
             precio: req.body.precio,
             imagen: req.files.imagen.name,
-            tecnologia: req.body.tecnologia
+            tecnologia: req.body.tecnologia,
+            status: req.body.status
         }
           //validar si hay archivo
           if (!req.files){
@@ -105,7 +107,8 @@ exports.postModificarLibro = function(req, res){
             descripcion: req.body.descripcion,
             autor: req.body.autor,
             precio: req.body.precio,
-            tecnologia: req.body.tecnologia
+            tecnologia: req.body.tecnologia,
+            status: req.body.status
         }
     }
 
