@@ -6,6 +6,7 @@ var fs = require('fs');
 var libroController = require('../Controllers/libro_controller');
 
 var comentarioController = require('../Controllers/comentario_controller');
+var pagolController = require('../Controllers/pago_controller');
 
 var app = express();
 
@@ -72,6 +73,12 @@ router.get('/ComentarioLibro/:id',comentarioController.showComentarios);
 
 router.post('/agregarComentario',comentarioController.crearComentario);
 
+//Pagos
+//hacer pago statico //falta adaptarlo dinamicamente
+router.get('/pay', pagolController.pay);
+
+//si es valida la compra
+router.get('/Success',pagolController.success);
 
 //Admin Libro
 //Aplicacion de Controllers //indexLibro
