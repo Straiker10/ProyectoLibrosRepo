@@ -3,6 +3,8 @@ var db = require("../Models/conexion");
 
 var fs = require('fs');
 
+//Seccion admin libros
+
 exports.libro= function(req,res){
     //res.render('CatalogoLibro' ,{titulo:'Catalgo de libros'});
     db.query("SELECT * FROM libro", function(err,results){
@@ -13,7 +15,7 @@ exports.libro= function(req,res){
 
 exports.showLibro= function(req,res){
     //res.render('CatalogoLibro' ,{titulo:'Catalgo de libros'});
-    db.query("SELECT * FROM libro Where status ='Disponible'", function(err,results){
+    db.query("SELECT * FROM libro Where status ='1'", function(err,results){
 
         res.render('CatalogoLibro', { titulo: 'Libros', libros: results });
     });

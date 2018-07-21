@@ -8,11 +8,25 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" >
-                                <i></i><a href="/libros/crearLibro">Nuevo Libro</a></button>
+                            <i></i><a class="btn btn-xs btn-primary" href="/libros/crearLibro">Nuevo Libro</a>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" name="buscar" id="buscar" placeholder="Buscar" class="form-control" >
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-dollar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- DATA TABLE -->
                             <div class="table-responsive table-responsive-data2">
-                                <table class="table table-data2">
+                                <table id="myTable" class="table table-data2">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
@@ -32,13 +46,19 @@
                                                 <td><%= libros[i].descripcion %></td>
                                                 <td><%= libros[i].autor %></td>
                                                 <td><%= libros[i].precio %></td>
+                                                <% if(libros[i].status == 1){ %>
+                                                    <td>Disponible</td>
+                                                <% } else{ %>  
+                                                    <td>No disponible</td>
+                                                <% } %>
+                                    
                                                 <td></td>
                 
                                                 <!--seccion botones-->
                                                 <td>
-                                                    <button class="au-btn au-btn-icon au-btn--green" >
-                                                        <a href='/libros/modificarLibro/<%= libros[i].id_libro %>'>Editar</a>
-                                                    </button>
+                                                   
+                                                    <a class="btn btn-xs btn-success" href='/libros/modificarLibro/<%= libros[i].id_libro %>'>Editar</a>
+                                                   
                                                 </td>
                                                 <td>
                                                     <button onclick="eliminarLibro('<%= libros[i].id_libro %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
@@ -59,5 +79,14 @@
 </div>
 
 <!-- JS para eliminar libro-->
+<script>
+    // do Filter on View
+	$("#buscar").on("keyup", function() {
+	    var inputValue = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	    	$(this).toggle($(this).text().toLowerCase().indexOf(inputValue) > -1)
+	    });
+	});
+</script>
 <script src="../javascripts/libros.js"></script>
 <%- include ../footer/footerBack.ejs%>

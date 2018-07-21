@@ -15,7 +15,7 @@
                                     <div class="form-group">
                                         Nobre libro
                                         <div class="input-group">
-                                            <input type="text" name="nombre" id="nombre" placeholder="Nombre libro" class="form-control" >
+                                            <input type="text" name="nombre" id="nombre" required="required" placeholder="Nombre libro" class="form-control" >
                                             <div class="input-group-addon">
                                                 <i class="fa fa-keyboard-o"></i>
                                             </div>
@@ -24,7 +24,7 @@
                                     <div class="form-group">
                                         Autor
                                         <div class="input-group">
-                                                <input type="text" name="autor" id="autor" placeholder="Autor" class="form-control" >
+                                                <input type="text" name="autor" id="autor" required="required" placeholder="Autor" class="form-control" >
                                             <div class="input-group-addon">
                                                 <i class="fa fa-align-justify"></i>
                                             </div>
@@ -33,7 +33,7 @@
                                     <div class="form-group">
                                         Precio
                                         <div class="input-group">
-                                            <input type="text" name="precio" id="precio" placeholder="Precio" class="form-control" >
+                                            <input type="number" name="precio" id="precio" required="required" placeholder="Precio" class="form-control" >
                                             <div class="input-group-addon">
                                                 <i class="fa fa-dollar"></i>
                                             </div>
@@ -42,24 +42,24 @@
                                     <div class="form-group">
                                         Tecnologia
                                         <div class="input-group">
-                                            <input type="text" name="tecnologia" id="tecnologia" placeholder="Tecnología" class="form-control" >
+                                            <input type="text" name="tecnologia" id="tecnologia" required="required" placeholder="Tecnología" class="form-control" >
                                             <div class="input-group-addon">
                                                 <i class="fa fa-dollar"></i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                            Status
-                                            <div class="input-group">
-                                                <select name="status" id="status" class="form-control">
-                                                        <option value="Disponible">Disponible</option>
-                                                        <option value="NoDisponible">No disponible</option>
-                                                      </select>
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-dollar"></i>
-                                                </div>
+                                        Status
+                                        <div class="input-group">
+                                            <select name="status" id="status" required="required" class="form-control">
+                                                    <option value="1">Disponible</option>
+                                                    <option value="0">No disponible</option>
+                                                    </select>
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-dollar"></i>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
 

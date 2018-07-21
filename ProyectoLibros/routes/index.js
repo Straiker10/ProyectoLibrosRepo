@@ -3,7 +3,9 @@ var router = express.Router();
 var db = require("../Models/conexion");
 
 var fs = require('fs');
-var libroController = require('../Controllers/libro_controller')
+var libroController = require('../Controllers/libro_controller');
+
+var comentarioController = require('../Controllers/comentario_controller');
 
 var app = express();
 
@@ -61,11 +63,17 @@ router.get('/CarritoCompras', function(req, res, next) {
 
 
 
-//Catalogo provisional
+//Catalogo
 
-//Aplicacion de Controllers //indexLibro
+//Aplicacion de Controllers 
 router.get('/CatalogoLibro', libroController.showLibro);
 
+router.get('/ComentarioLibro/:id',comentarioController.showComentarios);
+
+router.post('/agregarComentario',comentarioController.crearComentario);
+
+
+//Admin Libro
 //Aplicacion de Controllers //indexLibro
 router.get('/libros/indexLibro', libroController.libro);
 

@@ -23,7 +23,11 @@
                     </div> 
                     <address style="text-align: center">
                          <strong >Autor: <%= libros[i].autor %></strong><br /> Tecnología: <%= libros[i].tecnologia %><br /><br>
-                         <img src="../images/circulo.png">&nbsp;&nbsp;<%= libros[i].status %>
+                         <img src="../images/circulo.png">&nbsp;&nbsp; <% if(libros[i].status == 1){ %>
+                            Disponible
+                        <% } else{ %>  
+                            No disponible
+                        <% } %>
                     </address>
                     <div style="text-align: center; font-size: 30pt; color: #149196; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" >$<%= libros[i].precio %></div>
                     <br>
@@ -34,9 +38,8 @@
                     <button type="submit" class="btn btn-success btn-block btn-md" style="background-color:#C52D2F; border-color: #C52D2F" >
                         Agregar Carrito
                     </button> 
-                    <button type="submit" class="btn btn-success btn-block" style="background-color:#C52D2F; border-color: #C52D2F">
-                        Comentarios
-                    </button>
+
+                    <a href="/ComentarioLibro/<%= libros[i].id_libro %>" class="btn btn-success btn-block" style="background-color:#C52D2F; border-color: #C52D2F">Comentarios </a>
             </div>
             </div>
     <% }%>
