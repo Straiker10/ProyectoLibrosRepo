@@ -28,6 +28,11 @@ router.get('/IndexBack', function(req, res, next) {
 });
 router.get('/Login', function(req, res, next) {
 	req.session.destroy();
+	if (req.session.cart){
+
+	}else{
+		req.session.cart=[]
+	}
   res.render('Login', { title: 'Inicio De Sesión',error:"" });
 });
 router.post('/Login', function(req, res) {
@@ -60,6 +65,11 @@ router.post('/Login', function(req, res) {
 });
 
 router.get('/Contacto', function(req, res, next) {
+	if (req.session.cart){
+
+	}else{
+		req.session.cart=[]
+	}
   res.render('Contacto', { title: 'Contacto' });
 });
 router.post('/CarritoCompras', function(req, res, next) {
@@ -102,6 +112,11 @@ router.post('/CarritoCompras', function(req, res, next) {
   });
 
 router.get('/CarritoCompras', function(req, res, next) {
+	if (req.session.cart){
+
+	}else{
+		req.session.cart=[]
+	}
 	var concepto="";
 	var total=0;
 	for(var k=0; k < req.session.cart.length; k++){
