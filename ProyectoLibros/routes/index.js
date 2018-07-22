@@ -9,9 +9,13 @@ var comentarioController = require('../Controllers/comentario_controller');
 var pagolController = require('../Controllers/pago_controller');
 
 var app = express();
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	if (req.session.cart){
+
+}else{
+	req.session.cart=[]
+}
   res.render('index', { title: 'Express' });
 });
 router.get('/IndexBack', function(req, res, next) {
@@ -58,8 +62,54 @@ router.post('/Login', function(req, res) {
 router.get('/Contacto', function(req, res, next) {
   res.render('Contacto', { title: 'Contacto' });
 });
+router.post('/CarritoCompras', function(req, res, next) {
+	Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+	var unico=true;
+	if (req.session.cart){
+
+	}else{
+		req.session.cart=[]
+	}
+	if(req.body.accion=="agregar"){
+		for(var i=0; i < req.session.cart.length; i++){
+			if(req.session.cart[i].id_libro==req.body.id_libro){
+				unico=false;
+			}
+		}
+		if(unico){
+			req.session.cart.push({id_libro:req.body.id_libro,nombre:req.body.nombre,tecnologia:req.body.tecnologia, autor:req.body.autor,precio:req.body.precio,estado:req.body.estado});	
+		}		
+	}
+	if(req.body.accion=="eliminar"){
+		for (var j=0;j<req.session.cart.length;j++){
+			if(req.session.cart[j].id_libro==req.body.id_libro){
+				req.session.cart.remove(j);
+			}
+		}
+	}
+	var concepto="";
+	var total=0;
+	for(var k=0; k < req.session.cart.length; k++){
+			concepto=concepto+req.session.cart[k].nombre+" + ";
+			total=total+parseFloat(req.session.cart[k].precio);
+	}
+	concepto = concepto.substring(0, concepto.length - 3);
+	res.render('CarritoCompras', { title: 'Carrito', cart:req.session.cart,concepto:concepto,total:total });
+  });
+
 router.get('/CarritoCompras', function(req, res, next) {
-	res.render('CarritoCompras', { title: 'Carrito' });
+	var concepto="";
+	var total=0;
+	for(var k=0; k < req.session.cart.length; k++){
+			concepto=concepto+req.session.cart[k].nombre+" + ";
+			total=total+parseFloat(req.session.cart[k].precio);
+	}
+	concepto = concepto.substring(0, concepto.length - 3);
+	res.render('CarritoCompras', { title: 'Carrito',cart:req.session.cart,concepto:concepto,total:total });
   });
 
 

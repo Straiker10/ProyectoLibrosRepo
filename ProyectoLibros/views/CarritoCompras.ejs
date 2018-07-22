@@ -1,20 +1,58 @@
 <%- include header/headerFront.ejs%>
-<form action="https://sandbox.paypal.com/cgi-bin/webscr" method="post" target="paypal">
-    <input type="hidden" name="cmd" value="_cart">
-    <input type="hidden" name="image_url" value="http://risal.collectifs.net/IMG/cache-150x50/arton1758-150x50.jpg"> 
-        <input type="hidden" name="image_url" value="http://risal.collectifs.net/IMG/cache-150x50/arton1758-150x50.jpg"> 
-     
-    <input type="hidden" name="add" value="1">
-    <input type="hidden" name="business" value="uhperezoscar@gmail.com">
-    <input type="hidden" name="item_name" value="Silla Empresarial">
-    <input type="hidden" name="amount" value="1500.00">
-
-    <input type="hidden" name="shopping_url" value="http://www.misitio.com/index.html">
-    <input type="hidden" name="return" value="http://www.misitio.com/gracias.html">
-    <input type="hidden" name="cancel_return" value="http://www.misitio.com/cancelar.html">
-    <input type="hidden" name="bn" value="PP-ShopCartBF:x-click-but22.gif:NonHosted">
-    <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but22.gif" border="0"
-        name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-<%- include footer/footerFront.ejs%>
+    <% if (cart.length!=0){%>
+        <div class="row">
+            <div class="col-md-12" style="padding-left: 10%;padding-right: 10%;">
+                <p>items:<%=cart.length%></p>
+                <br>
+                <p>concepto: <%=concepto%></p>
+                <br>
+                <p>precio: <%=total%></p>
+                <br>
+                <table class="table">
+              <tr>
+                <th>nombre</th>
+                <th>tecnología</th> 
+                <th>autor</th>
+                <th>precio</th>
+                <th>estado</th>
+                <th></th>
+              </tr>
+              <% for(var i=0; i < cart.length; i++){ %>
+              <%if(cart[i].estado=="activo"){%>
+              <tr>
+                <td><%= cart[i].nombre%></td>
+                <td><%= cart[i].tecnologia%></td> 
+                <td><%= cart[i].autor%></td>
+                <td><%= cart[i].precio%></td>
+                <td><%= cart[i].estado%></td>
+                <td>
+                    <form method="post" action="CarritoCompras">
+                        <input type="hidden" name="id_libro" value=<%=cart[i].id_libro%>>
+                        <input type="hidden" name="accion" value="eliminar">
+                        <button class="btn btn-danger">Eliminar del carrito</button>        
+                    </form>
+                </td>
+              </tr>
+              <%}%>
+              <%}%>
+            </table>    
+            </div>
+        </div>
+        <div class="row">
+            <form action="https://sandbox.paypal.com/cgi-bin/websrc/" method="post" target="_blank">
+                <input type="hidden" name="cmd" value="_xclick" />
+                <input type="hidden" name="business" value="lronquillo977-facilitator@gmail.com" />
+                <input type="hidden" name="item_name" value="<%=concepto%>" />
+                <input type="hidden" name="amount" value="<%=total%>" /> 
+                <input type="hidden" name="currency_code" value="MXN">
+                <input type="hidden" name="return" value="http://localhost:3000/gracias/">
+                <input type="submit" value="Comprar" class="btn btn-success" style="margin-left: 50%" />
+          </form>
+        </div>
+        <br>
+    <%}else{%>
+    <h1 style="color:black;">no hay nada en el carrito</h1>
+    <%}%>
+<footer>
+    <%- include footer/footerFront.ejs%>    
+</footer>
