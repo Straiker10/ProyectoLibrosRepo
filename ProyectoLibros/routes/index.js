@@ -10,6 +10,7 @@ var comentarioController = require('../Controllers/comentario_controller');
 var pagolController = require('../Controllers/pago_controller');
 var clienteController = require('../Controllers/clientesController');
 var seleccion1 = require('../Controllers/selectInicio_Controller'); ///seleccion de datos estrategicos
+var ventaslocas = require('../Controllers/ventas_controllers');
 
 var app = express();
 /* GET home page. */
@@ -22,11 +23,15 @@ router.get('/', vendidosController.showTop, function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-
+router.get('/IndexBack',function(req,res,next){
+	res.render('IndexBack', {title: 'Inicio',error:EE});
+	});
 router.get('/Login', function(req, res, next) {
 	
   res.render('Login', { title: 'Inicio De Sesión',error:"" });
 });
+
+
 
 router.post('/Login', seleccion1.seleccionProductos);  //adaptacion vista
 
@@ -140,11 +145,6 @@ router.get('/clientes/indexCliente', clienteController.cliente);
 //Eliminar cliente
 router.post('/clientes/eliminarCliente', clienteController.eliminarCliente);
 
-//router.get('/IndexBack',seleccion1.seleccionProductos);
-
-//router.get('/IndexBack',seleccion1.seleccionVenta);
-
-//router.get('/IndexBack',seleccion1.seleccionComentario);
-
+router.get('/ventas/IndexVentas', ventaslocas.ventas);
 
 module.exports = router;

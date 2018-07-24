@@ -90,23 +90,14 @@ exports.success= function(req,res){
             var items ="";
 
             if(state =="approved"){
+
                 //Obtener items del carrito;
                 for(var i in payment['transactions'][0]['item_list']['items']) {
                     items+="-"+JSON.stringify(payment['transactions'][0]['item_list']['items'][i]['name']); 
                 }
 
             
-                var id=0;
-                for(var k=0; k < req.session.cart.length; k++){
-                   id=req.session.cart[k].id_libro;          
-                    //nuevo query para el update del campo venta autoincrement
-                    var sql = "UPDATE libro SET venta = venta + 1 WHERE id_libro = ?";
-                    db.query(sql,[id], function(err,results){
-            
-                    });
-               }
-                
-               var venta = {
+                var venta = {
                     nombre_cliente: JSON.stringify(payment['payer']['payer_info']['last_name']),
                     fecha: JSON.stringify(payment['create_time']),
                     email: JSON.stringify(payment['payer']['payer_info']['email']),
@@ -118,8 +109,20 @@ exports.success= function(req,res){
                     
                 });
                 
+                var id=0;
+                for(var k=0; k < req.session.cart.length; k++){
+                   id=req.session.cart[k].id_libro;          
+                    //nuevo query para el update del campo venta autoincrement
+                    var sql = "UPDATE libro SET venta = venta + 1 WHERE id_libro = ?";
+                    db.query(sql,[id], function(err,results){
+            
+                    });
+               }
+                
+               
+                
             }
-          res.render('Success', { title: 'Libros', mensaje:'Grcias por su compra' });
+          res.render('Success', { title: 'Libros', mensaje:'Gracias por su compra' });
       }
   });
 };
