@@ -42,15 +42,12 @@
             </div>
         </div>
         <div class="row">
-            <form action="https://sandbox.paypal.com/cgi-bin/websrc/" method="post" target="_blank">
-                <input type="hidden" name="cmd" value="_xclick" />
-                <input type="hidden" name="business" value="lronquillo977-facilitator@gmail.com" />
-                <input type="hidden" name="item_name" value="<%=concepto%>" />
-                <input type="hidden" name="amount" value="<%=total%>" /> 
-                <input type="hidden" name="currency_code" value="MXN">
-                <input type="hidden" name="return" value="http://localhost:3000/gracias/">
-                <input type="submit" value="Comprar" class="btn btn-success" style="margin-left: 50%" />
-          </form>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a href="/pay" class="btn btn-success btn-block" >Pagar </a>
+            </div>
+          
         </div>
         <br>
     <%}else{%>

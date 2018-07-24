@@ -145,6 +145,8 @@ router.get('/pay', pagolController.pay);
 //si es valida la compra
 router.get('/Success',pagolController.success);
 
+router.get('/cancel',pagolController.cancel);
+
 //Admin Libro
 //Aplicacion de Controllers //indexLibro
 router.get('/libros/indexLibro', libroController.libro);

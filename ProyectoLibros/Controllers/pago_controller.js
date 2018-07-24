@@ -13,7 +13,7 @@ paypal.configure({
 exports.pay= function(req,res){
 
     //variable para generar el pago 
-    const create_payment_json = {
+    var create_payment_json = {
         "intent": "sale",
         "payer": {
             "payment_method": "paypal"
@@ -24,29 +24,22 @@ exports.pay= function(req,res){
         },
         "transactions": [{
             "item_list": {
-                "items": [{
-                    "name": "Red Sox Hat",
-                    "sku": "001",
-                    "price": "25.00",
-                    "currency": "USD",
-                    "quantity": 1
-                },
-                {
-                  "name": "Red Sox Hat2",
-                  "sku": "001",
-                  "price": "25.00",
-                  "currency": "USD",
-                  "quantity": 1
-              }
+                "items": [
               ]
             },
-            "amount": {
-                "currency": "USD",
-                "total": "50.00" //el total debe coicidir con la suma de productos.
-            },
+            "amount": {},
             "description": "Hat for the best team ever"
         }]
     };
+
+    var total=0;
+    for(var k=0; k < req.session.cart.length; k++){
+        total=total+parseFloat(req.session.cart[k].precio);
+       create_payment_json['transactions'][0]['item_list']['items'].push({ "name": req.session.cart[k].nombre,"sku": "001","price": req.session.cart[k].precio,"currency": "MXN", "quantity": 1 });
+    }
+
+    //add amount
+    create_payment_json['transactions'][0]['amount'] = { "currency": "MXN","total": total};
 
 //Generar el pago con paypal
   paypal.payment.create(create_payment_json, function (error, payment) {
@@ -59,24 +52,28 @@ exports.pay= function(req,res){
           }
         }
     }
-  });
+  })
 
 };
 
 //Si la respuesta de paypal es correcta
 exports.success= function(req,res){
     const payerId = req.query.PayerID;
-  const paymentId = req.query.paymentId;
+    const paymentId = req.query.paymentId;
+    var total=0;
+    for(var k=0; k < req.session.cart.length; k++){
+        total=total+parseFloat(req.session.cart[k].precio);
+    }
 
-  const execute_payment_json = {
-    "payer_id": payerId,
-    "transactions": [{
-        "amount": {
-            "currency": "USD",
-            "total": "50.00"
-        }
-    }]
-  };
+    var execute_payment_json = {
+        "payer_id": payerId,
+        "transactions": [{
+            "amount": {
+                "currency": "MXN",
+                "total": total
+            }
+        }]
+    };
 
     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
       if (error) {
@@ -86,22 +83,27 @@ exports.success= function(req,res){
         console.log(JSON.stringify(payment));
             var state = payment['state'];
             var items ="";
+
             if(state =="approved"){
                 //Obtener items del carrito;
                 for(var i in payment['transactions'][0]['item_list']['items']) {
                     items+="-"+JSON.stringify(payment['transactions'][0]['item_list']['items'][i]['name']); 
                 }
 
-                var venta = {
+                console.log(parseFloat(payment['transactions'][0]['amount']['total']));
+               var venta = {
                     nombre_cliente: JSON.stringify(payment['payer']['payer_info']['last_name']),
                     fecha: JSON.stringify(payment['create_time']),
                     email: JSON.stringify(payment['payer']['payer_info']['email']),
+                    monto: parseFloat(payment['transactions'][0]['amount']['total']),
                     articulos: items
                 }
                     
                 db.query("INSERT INTO venta SET ?",venta, function(err, results){
                     
                 });
+
+            
             }
           res.render('Success', { title: 'Libros', mensaje:'Grcias por su compra' });
       }
@@ -110,7 +112,7 @@ exports.success= function(req,res){
 
 //Si se cancela la compra
 exports.cancel= function(req,res){
-    res.render('Cancel', { titulo: 'Libros', mensaje:'Compra cancelada' });
+    res.redirect('/');
 };
 
 
