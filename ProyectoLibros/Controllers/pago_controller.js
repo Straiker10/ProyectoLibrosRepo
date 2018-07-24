@@ -1,5 +1,7 @@
 //Get conexion
 var db = require("../Models/conexion");
+var nodemailer= require('nodemailer');
+
 
 const paypal = require('paypal-rest-sdk');
 
@@ -32,10 +34,12 @@ exports.pay= function(req,res){
         }]
     };
 
+    
     var total=0;
     for(var k=0; k < req.session.cart.length; k++){
         total=total+parseFloat(req.session.cart[k].precio);
        create_payment_json['transactions'][0]['item_list']['items'].push({ "name": req.session.cart[k].nombre,"sku": "001","price": req.session.cart[k].precio,"currency": "MXN", "quantity": 1 });
+       
     }
 
     //add amount
@@ -63,6 +67,7 @@ exports.success= function(req,res){
     var total=0;
     for(var k=0; k < req.session.cart.length; k++){
         total=total+parseFloat(req.session.cart[k].precio);
+        
     }
 
     var execute_payment_json = {
@@ -102,13 +107,48 @@ exports.success= function(req,res){
                 db.query("INSERT INTO venta SET ?",venta, function(err, results){
                     
                 });
-
-            
+                
+                var id=0;
+                 for(var k=0; k < req.session.cart.length; k++){
+                        id=req.session.cart[k].id_libro;
+                        db.query("UPDATE libro SET venta = venta + 1 WHERE id_libro=?",id,function(err,results){
+                        });
+                    }
             }
           res.render('Success', { title: 'Libros', mensaje:'Grcias por su compra' });
       }
   });
 };
+
+exports.enviar= function(req,res)
+                    {
+                    //Estos son los valores que corresponden a la persona que enviara el correo.
+                    var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                    user: 'bookstoreutm@gmail.com', //Escribimos la cuenta de correo
+                    pass: 'Bookstore123'//El password de la cuenta de correo
+                    }
+                    });
+                    //Estos son los valores de lo que se enviara y a quien se enviara
+                    var mailOptions = {
+                    from: 'BOOKSTORE <bookstoreutm@gmail.com>',
+                    to: req.query.payment, //Este datos se toma del formulario de esta manera
+                    subject: "Compra realizada con exito.", //Este datos se toma del formulario de esta manera
+                    text: res.links('http:facebook.com')//Este datos se toma del formulario de esta manera
+                    };
+                    //Este método se encarga de hacer el envió.
+                    transporter.sendMail(mailOptions, function(error, info){
+                    if (error){
+                        console.log(error);
+                        res.render('/');
+                     } else {
+                        console.log("El correo se envió correctamente.");
+                        res.redirect('/');
+                        //tenemos que crear los archivos ejs para el enviado y error
+                    }
+                });
+            };
 
 //Si se cancela la compra
 exports.cancel= function(req,res){

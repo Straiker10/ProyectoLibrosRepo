@@ -4,13 +4,16 @@ var db = require("../Models/conexion");
 
 var fs = require('fs');
 var libroController = require('../Controllers/libro_controller');
+var vendidosController = require('../Controllers/vendidostop_controller');
 
 var comentarioController = require('../Controllers/comentario_controller');
 var pagolController = require('../Controllers/pago_controller');
+var clienteController = require('../Controllers/clientesController');
+var seleccion1 = require('../Controllers/selectInicio_Controller');
 
 var app = express();
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', vendidosController.showTop, function(req, res, next) {
 	if (req.session.cart){
 
 }else{
@@ -18,21 +21,16 @@ router.get('/', function(req, res, next) {
 }
   res.render('index', { title: 'Express' });
 });
-router.get('/IndexBack', function(req, res, next) {
+router.get('/IndexBack',seleccion1.seleccionProductos, function(req, res, next) {
 	if(req.session.ejemplo==1){
 		res.render('IndexBack', { title: 'Administrativo' });
+		
 	}else{
 		res.render('Login', { title: 'Inicio de sesión', error:"Debes iniciar sesión para accesar a ese módulo." });
 	};
-  	
 });
 router.get('/Login', function(req, res, next) {
-	req.session.destroy();
-	if (req.session.cart){
-
-	}else{
-		req.session.cart=[]
-	}
+	
   res.render('Login', { title: 'Inicio De Sesión',error:"" });
 });
 router.post('/Login', function(req, res) {
@@ -141,6 +139,7 @@ router.post('/agregarComentario',comentarioController.crearComentario);
 //Pagos
 //hacer pago statico //falta adaptarlo dinamicamente
 router.get('/pay', pagolController.pay);
+router.post('/enviar',pagolController.enviar);
 
 //si es valida la compra
 router.get('/Success',pagolController.success);
@@ -161,10 +160,23 @@ router.post('/libros/crearLibro', libroController.crearLibro);
 //Aplicacion de Controllers //eliminar libro
 router.post('/libros/eliminarLibro', libroController.eliminarLibro);
 
+
 //Aplicacion de Controllers //modificar libro GET
 router.get('/libros/modificarLibro/:id', libroController.getModificarLibro);
 
 //Aplicacion de Controllers //modificar libro POST
 router.post('/libros/modificarLibro', libroController.postModificarLibro);
+
+//MostrarClientes 
+router.get('/clientes/indexCliente', clienteController.cliente);
+//Eliminar cliente
+router.post('/clientes/eliminarCliente', clienteController.eliminarCliente);
+
+//router.get('/IndexBack',seleccion1.seleccionProductos);
+
+//router.get('/IndexBack',seleccion1.seleccionVenta);
+
+//router.get('/IndexBack',seleccion1.seleccionComentario);
+
 
 module.exports = router;
