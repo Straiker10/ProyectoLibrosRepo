@@ -1,7 +1,7 @@
 var db = require("../Models/conexion");
 
 var fs = require('fs');
-
+var ok=false;
 
 exports.seleccionProductos= function(req,res){
 
@@ -11,13 +11,12 @@ exports.seleccionProductos= function(req,res){
 	};
 	var query="select * from usuarios where correo='"+usuario.correo+"' and contrasena='"+usuario.contrasena+"'";
 	db.query("select * from usuarios where correo='"+usuario.correo+"' and contrasena='"+usuario.contrasena+"'",function(err,results){
-		if(err){
+        if(err){
 			res.render('Login', { title: 'Inicio de sesión', error:err });		
 		}else{
-			var ok=false;
 			for(var i=0; i<results.length; i++){
 				if(results[i].correo==usuario.correo && results[i].contrasena==usuario.contrasena){
-					var ok=true;
+					ok=true;
 				};
 			};
 			if(ok){

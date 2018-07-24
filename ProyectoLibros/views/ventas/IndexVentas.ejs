@@ -47,7 +47,7 @@
                                                 <td>
                                                 </td>
                                                 <td>
-                                                    <button onclick="eliminarLibro('<%= ventas[i].id_venta %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
+                                                    <button onclick="eliminarVenta('<%= ventas[i].id_venta %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
                                                 </td>
                                             </tr>
                                             <tr class="spacer"  id='row2<%= ventas[i].id_venta %>'></tr>
@@ -74,5 +74,5 @@
 	    });
 	});
 </script>
-<script src="../javascripts/libros.js"></script>
+<script src="../javascripts/venta.js"></script>
 <%- include ../footer/footerBack.ejs%>

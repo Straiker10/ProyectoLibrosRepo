@@ -23,17 +23,18 @@ router.get('/', vendidosController.showTop, function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/IndexBack',function(req,res,next){
-	res.render('IndexBack', {title: 'Inicio',error:EE});
-	});
+router.get('/IndexBack',seleccion1.seleccionProductos);
+	
 router.get('/Login', function(req, res, next) {
 	
   res.render('Login', { title: 'Inicio De Sesión',error:"" });
 });
 
+router.get('/nosotros', function(req,res,next){
+res.render('nosotros', {title: 'Nosotros'});
+});
 
-
-router.post('/Login', seleccion1.seleccionProductos);  //adaptacion vista
+router.post('/Login',seleccion1.seleccionProductos);  //adaptacion vista
 
 router.get('/Contacto', function(req, res, next) {
 	if (req.session.cart){
@@ -146,5 +147,7 @@ router.get('/clientes/indexCliente', clienteController.cliente);
 router.post('/clientes/eliminarCliente', clienteController.eliminarCliente);
 
 router.get('/ventas/IndexVentas', ventaslocas.ventas);
+
+router.post('/ventas/eliminarVenta', ventaslocas.eliminarVenta);
 
 module.exports = router;
