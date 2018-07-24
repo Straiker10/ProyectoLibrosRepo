@@ -95,7 +95,17 @@ exports.success= function(req,res){
                     items+="-"+JSON.stringify(payment['transactions'][0]['item_list']['items'][i]['name']); 
                 }
 
-                console.log(parseFloat(payment['transactions'][0]['amount']['total']));
+            
+                var id=0;
+                for(var k=0; k < req.session.cart.length; k++){
+                   id=req.session.cart[k].id_libro;          
+                    //nuevo query para el update del campo venta autoincrement
+                    var sql = "UPDATE libro SET venta = venta + 1 WHERE id_libro = ?";
+                    db.query(sql,[id], function(err,results){
+            
+                    });
+               }
+                
                var venta = {
                     nombre_cliente: JSON.stringify(payment['payer']['payer_info']['last_name']),
                     fecha: JSON.stringify(payment['create_time']),
@@ -108,12 +118,6 @@ exports.success= function(req,res){
                     
                 });
                 
-                var id=0;
-                 for(var k=0; k < req.session.cart.length; k++){
-                        id=req.session.cart[k].id_libro;
-                        db.query("UPDATE libro SET venta = venta + 1 WHERE id_libro=?",id,function(err,results){
-                        });
-                    }
             }
           res.render('Success', { title: 'Libros', mensaje:'Grcias por su compra' });
       }

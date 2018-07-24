@@ -9,7 +9,7 @@ var vendidosController = require('../Controllers/vendidostop_controller');
 var comentarioController = require('../Controllers/comentario_controller');
 var pagolController = require('../Controllers/pago_controller');
 var clienteController = require('../Controllers/clientesController');
-var seleccion1 = require('../Controllers/selectInicio_Controller');
+var seleccion1 = require('../Controllers/selectInicio_Controller'); ///seleccion de datos estrategicos
 
 var app = express();
 /* GET home page. */
@@ -21,46 +21,14 @@ router.get('/', vendidosController.showTop, function(req, res, next) {
 }
   res.render('index', { title: 'Express' });
 });
-router.get('/IndexBack',seleccion1.seleccionProductos, function(req, res, next) {
-	if(req.session.ejemplo==1){
-		res.render('IndexBack', { title: 'Administrativo' });
-		
-	}else{
-		res.render('Login', { title: 'Inicio de sesión', error:"Debes iniciar sesión para accesar a ese módulo." });
-	};
-});
+
+
 router.get('/Login', function(req, res, next) {
 	
   res.render('Login', { title: 'Inicio De Sesión',error:"" });
 });
-router.post('/Login', function(req, res) {
-	var usuario={
-		correo:req.body.correo,
-		contrasena:req.body.contrasena,
-	};
-	var query="select * from usuarios where correo='"+usuario.correo+"' and contrasena='"+usuario.contrasena+"'";
-	db.query("select * from usuarios where correo='"+usuario.correo+"' and contrasena='"+usuario.contrasena+"'",function(err,results){
-		if(err){
-			res.render('Login', { title: 'Inicio de sesión', error:err });		
-		}else{
-			var ok=false;
-			for(var i=0; i<results.length; i++){
-				if(results[i].correo==usuario.correo && results[i].contrasena==usuario.contrasena){
-					var ok=true;
-				};
-			};
-			if(ok){
-				req.session.ejemplo=1;
-				res.render('IndexBack', { title: 'Administrativo' });
-			}else{
-				res.render('Login', { title: 'Inicio de sesión', error:"El correo o contraseña son incorrectos.",query:query });
-			};
-			
-		};
-		
-	});
-  	
-});
+
+router.post('/Login', seleccion1.seleccionProductos);  //adaptacion vista
 
 router.get('/Contacto', function(req, res, next) {
 	if (req.session.cart){
@@ -137,7 +105,7 @@ router.get('/ComentarioLibro/:id',comentarioController.showComentarios);
 router.post('/agregarComentario',comentarioController.crearComentario);
 
 //Pagos
-//hacer pago statico //falta adaptarlo dinamicamente
+
 router.get('/pay', pagolController.pay);
 router.post('/enviar',pagolController.enviar);
 
