@@ -14,14 +14,15 @@ paypal.configure({
 exports.pay= function(req,res){
 
     //variable para generar el pago 
+    //cambiar cuando se suba al servidor
     var create_payment_json = {
         "intent": "sale",
         "payer": {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "https://bookstoreutm.azurewebsites.net/success",
-            "cancel_url": "https://bookstoreutm.azurewebsites.net/cancel"
+            "return_url": "http://localhost:3000/success", 
+            "cancel_url": "http://localhost:3000/cancel"
         },
         "transactions": [{
             "item_list": {
@@ -29,7 +30,7 @@ exports.pay= function(req,res){
               ]
             },
             "amount": {},
-            "description": "Hat for the best team ever"
+            "description": "La descripcion del articulo"
         }]
     };
 
@@ -108,6 +109,8 @@ exports.success= function(req,res){
                     
                 });
                 
+                //links de los libros
+                var links="";
                 var id=0;
                 for(var k=0; k < req.session.cart.length; k++){
                    id=req.session.cart[k].id_libro;          
@@ -116,7 +119,9 @@ exports.success= function(req,res){
                     db.query(sql,[id], function(err,results){
             
                     });
+                    links = links + req.session.cart[k].link +'\n';
                 }
+
                 var transporter = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
@@ -128,12 +133,12 @@ exports.success= function(req,res){
                 from: 'BOOKSTORE <bookstoreutm@gmail.com> ',
                 to: 'smurs_14@hotmail.com',
                 subject: 'Gracias por su compra.',
-                text: 'Le adjuntamos el link de descarga para poder visualizar su libro comprado.'
+                text: 'Le adjuntamos el link de descarga para poder visualizar su libro comprado.'+ links
                 };
                 transporter.sendMail(mailOptions, function(error, info){
                 if (error){
                     console.log(error);
-                    res.send(500, err.message);
+                    res.send(500, error.message);
                 } else {
                     console.log("Email sent");
                     res.status(200).jsonp(req.body);

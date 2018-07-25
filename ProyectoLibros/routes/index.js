@@ -63,7 +63,7 @@ router.post('/CarritoCompras', function(req, res, next) {
 			}
 		}
 		if(unico){
-			req.session.cart.push({id_libro:req.body.id_libro,nombre:req.body.nombre,tecnologia:req.body.tecnologia, autor:req.body.autor,precio:req.body.precio,estado:req.body.estado});	
+			req.session.cart.push({id_libro:req.body.id_libro,nombre:req.body.nombre,link:req.body.link,tecnologia:req.body.tecnologia, autor:req.body.autor,precio:req.body.precio,estado:req.body.estado});	
 		}		
 	}
 	if(req.body.accion=="eliminar"){
