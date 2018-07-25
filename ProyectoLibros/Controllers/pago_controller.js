@@ -111,6 +111,7 @@ exports.success= function(req,res){
                 
                 //links de los libros
                 var links="";
+                var nombrelibro = "";
                 var id=0;
                 for(var k=0; k < req.session.cart.length; k++){
                    id=req.session.cart[k].id_libro;          
@@ -119,9 +120,9 @@ exports.success= function(req,res){
                     db.query(sql,[id], function(err,results){
             
                     });
-                    links = links + req.session.cart[k].link +'\n';
+                    nombrelibro = nombrelibro + req.session.cart[k].nombre;
+                    links = links + nombrelibro + req.session.cart[k].link +'\n';
                 }
-
                 var transporter = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
@@ -133,7 +134,7 @@ exports.success= function(req,res){
                 from: 'BOOKSTORE <bookstoreutm@gmail.com> ',
                 to: 'smurs_14@hotmail.com',
                 subject: 'Gracias por su compra.',
-                text: 'Le adjuntamos el link de descarga para poder visualizar su libro comprado.'+ links
+                text: 'Le adjuntamos el link de descarga para poder visualizar su libro comprado.'+'\n' +  links
                 };
                 transporter.sendMail(mailOptions, function(error, info){
                 if (error){
@@ -150,36 +151,6 @@ exports.success= function(req,res){
       }
   });
 };
-
-/*exports.enviar= function(req,res)
-                    {
-                    //Estos son los valores que corresponden a la persona que enviara el correo.
-                    var transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                    user: 'bookstoreutm@gmail.com', //Escribimos la cuenta de correo
-                    pass: 'Bookstore123'//El password de la cuenta de correo
-                    }
-                    });
-                    //Estos son los valores de lo que se enviara y a quien se enviara
-                    var mailOptions = {
-                    from: 'BOOKSTORE <bookstoreutm@gmail.com>',
-                    to: req.query.payment, //Este datos se toma del formulario de esta manera
-                    subject: "Compra realizada con exito.", //Este datos se toma del formulario de esta manera
-                    text: res.links('http:facebook.com')//Este datos se toma del formulario de esta manera
-                    };
-                    //Este método se encarga de hacer el envió.
-                    transporter.sendMail(mailOptions, function(error, info){
-                    if (error){
-                        console.log(error);
-                        res.render('/');
-                     } else {
-                        console.log("El correo se envió correctamente.");
-                        res.redirect('/');
-                        //tenemos que crear los archivos ejs para el enviado y error
-                    }
-                });
-            };*/
 
 //Si se cancela la compra
 exports.cancel= function(req,res){
