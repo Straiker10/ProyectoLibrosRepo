@@ -150,6 +150,8 @@ router.post('/clientes/eliminarCliente', clienteController.eliminarCliente);
 
 router.get('/ventas/IndexVentas', ventaslocas.ventas);
 
+router.post('/ventas/IndexVentas', ventaslocas.filtro);
+
 router.post('/ventas/eliminarVenta', ventaslocas.eliminarVenta);
 
 module.exports = router;
