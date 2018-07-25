@@ -6,15 +6,19 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                            <p> Query: <%=query%></p>
                                 <div class="row">
                                         <div class="col-md-4">
                                                 <div class="form-group">
                                                         Filtro por Día:
+
                                                         <div class="input-group">
+                                                            <form method="post" action="IndexVentas">
                                                             <input type="number" name="dia" id="dia" placeholder="Ingresa un día (numerico)" class="form-control" >
                                                             <div class="input-group-addon">
-                                                                    <a class="fa fa-search" href="#"></a>
+                                                                <button><i class="fa fa-search"></i></button>
                                                             </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                         </div>
@@ -22,10 +26,12 @@
                                                 <div class="form-group">
                                                         Filtro por Mes:
                                                         <div class="input-group">
+                                                            <form method="post" action="IndexVentas">
                                                             <input type="number" name="mes" id="mes" placeholder="Ingresa un mes(Numerico)" class="form-control" >
                                                             <div class="input-group-addon">
-                                                                    <i class="fa fa-search"></i>
-                                                                </div>
+                                                                <button><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                         </div>
@@ -33,10 +39,12 @@
                                                 <div class="form-group">
                                                         Filtro por Año:
                                                         <div class="input-group">
+                                                            <form method="post" action="IndexVentas">
                                                             <input type="number" name="año" id="año" placeholder="Ingresa un año" class="form-control" >
                                                             <div class="input-group-addon">
-                                                                    <i class="fa fa-search"></i>
-                                                                </div>
+                                                                <button><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                            </form>      
                                                         </div>
                                                     </div>
                                         </div>
@@ -56,41 +64,45 @@
                                 </div>
                             </div>
                             <br>
-                            <!-- DATA TABLE -->
-                            <div class="table-responsive table-responsive-data2">
-                                <table id="myTable" class="table table-data2">
-                                    <thead>
-                                        <tr>
-                                            <th>nombre_cliente</th>
-                                            <th>fecha</th>
-                                            <th>email</th>
-                                            <th>monto</th>
-                                            <th>articulos</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for(var i=0; i < ventas.length; i++){ %>
-                                            <tr class="spacer tr-shadow" id='row<%= ventas[i].id_venta %>'>
-                                                <td><%= ventas[i].nombre_cliente %></td>
-                                                <td><%= ventas[i].fecha %></td>
-                                                <td><%= ventas[i].email %></td>
-                                                <td><%= ventas[i].monto %></td>
-                                                <td><%= ventas[i].articulos %></td>
-                                                <td></td>
-                                                <!--seccion botones-->
-                                                <td>
-                                                </td>
-                                                <td>
-                                                    <button onclick="eliminarVenta('<%= ventas[i].id_venta %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
-                                                </td>
+                            <%if (ventas.length!=0){%>
+                                <!-- DATA TABLE -->
+                                <div class="table-responsive table-responsive-data2">
+                                    <table id="myTable" class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th>nombre_cliente</th>
+                                                <th>fecha</th>
+                                                <th>email</th>
+                                                <th>monto</th>
+                                                <th>articulos</th>
+                                                <th></th>
                                             </tr>
-                                            <tr class="spacer"  id='row2<%= ventas[i].id_venta %>'></tr>
-                                        <% }%>
-                                    </tbody>
-                                </table>
-                                <!-- END DATA TABLE -->
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i < ventas.length; i++){ %>
+                                                <tr class="spacer tr-shadow" id='row<%= ventas[i].id_venta %>'>
+                                                    <td><%= ventas[i].nombre_cliente %></td>
+                                                    <td><%= ventas[i].fecha %></td>
+                                                    <td><%= ventas[i].email %></td>
+                                                    <td><%= ventas[i].monto %></td>
+                                                    <td><%= ventas[i].articulos %></td>
+                                                    <td></td>
+                                                    <!--seccion botones-->
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="eliminarVenta('<%= ventas[i].id_venta %>');"  class="btn  btn-xs btn-danger">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="spacer"  id='row2<%= ventas[i].id_venta %>'></tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                    <!-- END DATA TABLE -->
+                                </div>
+                            <%}else{%>
+                            <h1>no hay resultados disponibles</h1>
+                            <%}%>
                         </div>
                     </div>
                 </div>
