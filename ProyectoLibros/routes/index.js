@@ -113,7 +113,9 @@ router.post('/agregarComentario',comentarioController.crearComentario);
 //Pagos
 
 router.get('/pay', pagolController.pay);
-router.post('/enviar',pagolController.enviar);
+
+///descomenttar en caso de errores
+//router.post('/enviar',pagolController.enviar);
 
 //si es valida la compra
 router.get('/Success',pagolController.success);

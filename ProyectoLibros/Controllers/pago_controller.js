@@ -1,9 +1,8 @@
 //Get conexion
 var db = require("../Models/conexion");
-var nodemailer= require('nodemailer');
-
 
 const paypal = require('paypal-rest-sdk');
+var nodemailer = require('nodemailer'); // email sender function 
 
 //configuracion paypal //credenciales 
 paypal.configure({
@@ -21,8 +20,8 @@ exports.pay= function(req,res){
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3000/success",
-            "cancel_url": "http://localhost:3000/cancel"
+            "return_url": "https://bookstoreutm.azurewebsites.net/success",
+            "cancel_url": "https://bookstoreutm.azurewebsites.net/cancel"
         },
         "transactions": [{
             "item_list": {
@@ -117,17 +116,37 @@ exports.success= function(req,res){
                     db.query(sql,[id], function(err,results){
             
                     });
-               }
-                
-               
-                
+                }
+                var transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'bookstoreutm@gmail.com',
+                    pass: 'Bookstore123'
+                    }
+                });
+                var mailOptions = {
+                from: 'BOOKSTORE <bookstoreutm@gmail.com> ',
+                to: 'smurs_14@hotmail.com',
+                subject: 'Gracias por su compra.',
+                text: 'Le adjuntamos el link de descarga para poder visualizar su libro comprado.'
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                if (error){
+                    console.log(error);
+                    res.send(500, err.message);
+                } else {
+                    console.log("Email sent");
+                    res.status(200).jsonp(req.body);
+                    }
+                });
             }
+           
           res.render('Success', { title: 'Libros', mensaje:'Gracias por su compra' });
       }
   });
 };
 
-exports.enviar= function(req,res)
+/*exports.enviar= function(req,res)
                     {
                     //Estos son los valores que corresponden a la persona que enviara el correo.
                     var transporter = nodemailer.createTransport({
@@ -155,7 +174,7 @@ exports.enviar= function(req,res)
                         //tenemos que crear los archivos ejs para el enviado y error
                     }
                 });
-            };
+            };*/
 
 //Si se cancela la compra
 exports.cancel= function(req,res){
