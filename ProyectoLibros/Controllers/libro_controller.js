@@ -37,6 +37,7 @@ exports.crearLibro = function(req, res, nex){
         precio: req.body.precio,
         imagen: req.files.imagen.name,
         tecnologia: req.body.tecnologia,
+        link: req.body.link,
         status: req.body.status
     }
 
@@ -52,9 +53,9 @@ exports.crearLibro = function(req, res, nex){
         if (err)
             return res.status(500).send(err);
         });
+        
+        res.redirect('/libros/indexLibro');
     });
-
-    res.render('libros/crearLibro', { titulo: 'Libro creado'});
 }
 
 
@@ -90,6 +91,7 @@ exports.postModificarLibro = function(req, res){
             precio: req.body.precio,
             imagen: req.files.imagen.name,
             tecnologia: req.body.tecnologia,
+            link: req.body.link,
             status: req.body.status
         }
           //validar si hay archivo
@@ -110,6 +112,7 @@ exports.postModificarLibro = function(req, res){
             autor: req.body.autor,
             precio: req.body.precio,
             tecnologia: req.body.tecnologia,
+            link: req.body.link,
             status: req.body.status
         }
     }
