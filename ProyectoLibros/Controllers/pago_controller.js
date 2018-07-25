@@ -21,11 +21,7 @@ exports.pay= function(req,res){
             "payment_method": "paypal"
         },
         "redirect_urls": {
-<<<<<<< HEAD
-            "return_url": "http://localhost:3000/success", 
-=======
             "return_url": "http://localhost:3000/success",
->>>>>>> ecd83a6d63e86db3a6a3a9ad5c9cd49e2512c5b2
             "cancel_url": "http://localhost:3000/cancel"
         },
         "transactions": [{
