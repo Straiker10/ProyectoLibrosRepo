@@ -6,14 +6,43 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <select name="filtro" id="filtro" required="required" class="form-control">
-                                        <option value="">Filtrar ventas de Hoy</option>
-                                        <option value="">Filtrar ventas del Mes</option>
-                                        <option value="">Filtrar ventas del Año</option>
-                                        </select>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        Filtro por Día:
+                                                        <div class="input-group">
+                                                            <input type="number" name="dia" id="dia" placeholder="Ingresa un día (numerico)" class="form-control" >
+                                                            <div class="input-group-addon">
+                                                                    <a class="fa fa-search" href="#"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                         </div>
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        Filtro por Mes:
+                                                        <div class="input-group">
+                                                            <input type="number" name="mes" id="mes" placeholder="Ingresa un mes(Numerico)" class="form-control" >
+                                                            <div class="input-group-addon">
+                                                                    <i class="fa fa-search"></i>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        Filtro por Año:
+                                                        <div class="input-group">
+                                                            <input type="number" name="año" id="año" placeholder="Ingresa un año" class="form-control" >
+                                                            <div class="input-group-addon">
+                                                                    <i class="fa fa-search"></i>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                    </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -69,7 +98,6 @@
         </div>
     </div>
 </div>
-
 <!-- JS para eliminar libro-->
 <script>
     // do Filter on View
